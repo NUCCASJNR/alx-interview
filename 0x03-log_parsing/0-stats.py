@@ -12,7 +12,7 @@ possible_status_code = [200, 301, 400, 401, 403, 404, 405, 500]
 
 
 def stat():
-    print(f"File Size: {total_file_size}")
+    print(f"File size: {total_file_size}")
     for status, count in sorted(status_codes.items()):
         print(f"{status}: {count}")
 
