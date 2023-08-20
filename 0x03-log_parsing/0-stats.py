@@ -22,14 +22,14 @@ try:
         try:
             line = line.split()
             file_size = int(line[-1])
-            total_file_size += file_size
             code = int(line[-2])
-            if code in possible_status_code:
-                if code in status_codes:
+            if code in possible_status_code and type(code) == int:
+                total_file_size += file_size
+                num_of_lines += 1
+                if code in status_codes.keys():
                     status_codes[code] += 1
                 else:
                     status_codes[code] = 1
-            num_of_lines += 1
             if (num_of_lines % 10) == 0:
                 stat()
         except ValueError:
