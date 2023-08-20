@@ -20,7 +20,8 @@ def stat():
 try:
     for line in sys.stdin:
         try:
-            line = line.split()
+            line = line.rstrip()
+            print(line)
             file_size = int(line[-1])
             code = int(line[-2])
             if not code or code in \
