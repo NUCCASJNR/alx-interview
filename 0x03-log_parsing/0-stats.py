@@ -23,7 +23,7 @@ try:
             line = line.split()
             file_size = int(line[-1])
             code = int(line[-2])
-            if not code or code in \
+            if code or code in \
                     possible_status_code and isinstance(code, int):
                 total_file_size += file_size
                 num_of_lines += 1
