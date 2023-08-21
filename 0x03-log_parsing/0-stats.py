@@ -27,13 +27,13 @@ try:
                     possible_status_code and isinstance(code, int):
                 total_file_size += file_size
                 num_of_lines += 1
-                if code in status_codes.keys():
+                if code in status_codes:
                     status_codes[code] += 1
                 else:
                     status_codes[code] = 1
             if (num_of_lines % 10) == 0:
                 stat()
-        except TypeError:
+        except ValueError:
             pass
 except KeyboardInterrupt as err:
     stat()
