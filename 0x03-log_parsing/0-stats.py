@@ -20,8 +20,7 @@ def stat():
 try:
     for line in sys.stdin:
         try:
-            line = line.rstrip()
-            print(line)
+            line = line.split()
             file_size = int(line[-1])
             code = int(line[-2])
             if not code or code in \
@@ -34,7 +33,7 @@ try:
                     status_codes[code] = 1
             if (num_of_lines % 10) == 0:
                 stat()
-        except ValueError:
+        except TypeError:
             pass
-except KeyboardInterrupt:
+except KeyboardInterrupt as err:
     stat()
