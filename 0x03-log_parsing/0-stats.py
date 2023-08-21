@@ -21,6 +21,7 @@ try:
     for line in sys.stdin:
         try:
             line = line.split()
+            print(line)
             file_size = int(line[-1])
             code = int(line[-2])
             if code in possible_status_code and isinstance(code, int):
@@ -30,9 +31,11 @@ try:
                     status_codes[code] += 1
                 else:
                     status_codes[code] = 1
-            if (num_of_lines % 10) == 0:
-                stat()
+            # if (num_of_lines % 10) == 0:
+            #     stat()
         except ValueError:
             pass
-except KeyboardInterrupt as err:
+except KeyboardInterrupt:
+    sys.exit(0)
+finally:
     stat()
