@@ -13,7 +13,7 @@ def validUTF8(data: List[int]) -> Union[bool, List[str]]:
         if char in range(0, 256):
             try:
                 decoded_char = bytes([char]).decode("utf-8")
-            except UnicodeDecodeError:
+            except IndexError and UnicodeError:
                 return False
         else:
             return False
