@@ -13,7 +13,7 @@ def validUTF8(data: List[int]) -> Union[bool, List[str]]:
     for char in data:
         if char <= 255:
             try:
-                decoded_char = bytes(char).decode("utf-8")
+                decoded_char = bytes([char]).decode("utf-8")
                 new_li.append(decoded_char)
             except UnicodeDecodeError:
                 return False
