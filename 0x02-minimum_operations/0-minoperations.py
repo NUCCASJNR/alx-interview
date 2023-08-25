@@ -23,8 +23,10 @@ def minOperations(n: int) -> int:
         if n % char_len == 0:
             # add copy ops
             ops += 1
+            print(ops)
             # save the number of characters in the clipboard
             clip = char_len
+            print(clip)
         # else just paste whats already in the clip
         char_len += clip
         # add paste ops
