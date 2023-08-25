@@ -19,4 +19,4 @@ def validUTF8(data: List[int]) -> Union[bool, List[str]]:
                 return False
         else:
             return False
-    return new_li
+    return True
