@@ -4,6 +4,8 @@
 
 - [0x01-lockboxes](./0x01-lockboxes)
 
-- [0x03-minimum_operatons](./0x02-minimum_operations)
+- [0x03-minimum_operations](./0x02-minimum_operations)
 
 - [0x04-utf8_validation](./0x04-utf8_validation)
+
+- [0x05-nqueens](./0x05-nqueens)
