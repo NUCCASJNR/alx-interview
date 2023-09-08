@@ -1,32 +1,60 @@
 #!/usr/bin/node
-
-// Write a script that prints all characters of a Star Wars movie:
-
-// The first argument is the Movie ID - example: 3 = “Return of the Jedi”
-// Display one character name by line
-// You must use the Star wars API
-// You must use the module request
-
 const req = require('request');
-const movieId = process.argv[2];
-const url = 'https://swapi-api.alx-tools.com/api/films';
 
-req.get(`${url}/${movieId}`, (error, response, body) => {
-  if (error) {
-    console.error(error);
-  } else {
-    const res = JSON.parse(body);
-    const idan = res.characters;
-    for (let i = 0; i < idan.length; i++) {
-      const ohk = idan[i];
-      req.get(`${ohk}`, (error, response, body) => {
-        if (error) {
-          console.error(error);
-        } else {
-          const newres = JSON.parse(body);
-          console.log(newres.name);
+function getRequest (url) {
+  return new Promise((resolve, reject) => {
+    req.get(url, (error, response, body) => {
+      if (error) {
+        reject(error);
+      } else if (response.statusCode !== 200) {
+        reject(new Error(`Request failed with status code ${response.statusCode}`));
+      } else {
+        try {
+          const movieData = JSON.parse(body);
+          const chars = movieData.characters;
+          const characterPromises = chars.map(fetchCharacter);
+          Promise.all(characterPromises)
+            .then(characterNames => {
+              resolve(characterNames);
+            })
+            .catch(reject);
+        } catch (parseError) {
+          reject(parseError);
         }
-      });
-    }
-  }
-});
+      }
+    });
+  });
+}
+
+function fetchCharacter (characterUrl) {
+  return new Promise((resolve, reject) => {
+    req.get(characterUrl, (error, response, body) => {
+      if (error) {
+        reject(error);
+      } else if (response.statusCode !== 200) {
+        reject(new Error(`Request failed with status code ${response.statusCode}`));
+      } else {
+        try {
+          const characterData = JSON.parse(body);
+          resolve(characterData.name);
+        } catch (parseError) {
+          reject(parseError);
+        }
+      }
+    });
+  });
+}
+
+const MovieId = process.argv[2];
+const url = 'https://swapi-api.alx-tools.com/api/films';
+const CompleteUrl = `${url}/${MovieId}`;
+
+getRequest(CompleteUrl)
+  .then(characterNames => {
+    characterNames.forEach(characterName => {
+      console.log(characterName);
+    });
+  })
+  .catch(error => {
+    console.error(`Error: ${error}`);
+  });
