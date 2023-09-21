@@ -15,6 +15,7 @@ def rotate_2d_matrix(matrix):
 
     duplicated_matrix = [row[:] for row in matrix]
     matrix_size = len(matrix)
+    print(matrix_size)
     b = -1
     # iterate through each row in the duplicated matrix
     for row in duplicated_matrix:
