@@ -5,7 +5,7 @@
 from typing import List
 
 
-def makeChange(coins: List[int], total: int) -> int:
+'''def makeChange(coins: List[int], total: int) -> int:
     """
 
     Args:
@@ -31,4 +31,17 @@ def makeChange(coins: List[int], total: int) -> int:
     if total == 0:
         """return the total coins used"""
         return total_coins_used
+    return -1'''
+
+
+def makeChange(coins: list, total: int) -> int:
+    sorted_coins = sorted(coins, reverse=True)
+    used_coins = 0
+    for coin in sorted_coins:
+        if total == 0:
+            break
+        used_coins += total // coin
+        total = total % coin
+    if total == 0:
+        return used_coins
     return -1
