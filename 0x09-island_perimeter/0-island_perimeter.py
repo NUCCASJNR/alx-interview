@@ -7,7 +7,7 @@ Island Perimeter
 # from typing import List
 
 
-def island_perimeter(grid: list) -> int:
+def island_perimeter(grid: list[list[int]]) -> int:
     """
     Island Perimeter
     Args:
